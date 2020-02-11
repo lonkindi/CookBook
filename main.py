@@ -27,11 +27,34 @@ def main():
                 counter += 1
             file.readline()
             counter = 0
-    print('Задача №1')
-    print(f'cook_book = {cook_book}')
+    print('Задача №1', end='')
+    for dish in cook_book:
+        print(f'\n{dish}:')
+        for ing_list in cook_book[dish]:
+            print(ing_list)
+    print()
     get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+
 
 def get_shop_list_by_dishes(dishes, person_count):
     shop_list = dict()
+    for dish in dishes:
+        if cook_book.get(dish) == None:
+            print(f'Блюда {dish} нет в повареной книге')
+            continue
+        else:
+            for ingredient in cook_book.get(dish):
+                ingr_measure = ingredient['measure']
+                ing_quantity = ingredient['quantity'] * person_count
+                if shop_list.get(ingredient['ingredient_name']) == None:
+                    shop_list[ingredient['ingredient_name']] = {'measure': ingr_measure, 'quantity': ing_quantity}
+                else:
+                    current_quantity = shop_list[ingredient['ingredient_name']].get('quantity')
+                    shop_list[ingredient['ingredient_name']] = {'measure': ingr_measure,
+                                                                'quantity': current_quantity + ing_quantity}
+    print('Задача №2')
+    for ingredient in shop_list:
+        print(f'{ingredient}: {shop_list[ingredient]}')
+
 
 main()
