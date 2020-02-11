@@ -33,14 +33,15 @@ def main():
         for ing_list in cook_book[dish]:
             print(ing_list)
     print()
-    get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+    print('Задача №2')
+    get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Жаркое'], 2)
 
 
 def get_shop_list_by_dishes(dishes, person_count):
     shop_list = dict()
     for dish in dishes:
         if cook_book.get(dish) == None:
-            print(f'Блюда {dish} нет в повареной книге')
+            print(f'Блюда "{dish}" нет в поваренной книге!')
             continue
         else:
             for ingredient in cook_book.get(dish):
@@ -52,7 +53,6 @@ def get_shop_list_by_dishes(dishes, person_count):
                     current_quantity = shop_list[ingredient['ingredient_name']].get('quantity')
                     shop_list[ingredient['ingredient_name']] = {'measure': ingr_measure,
                                                                 'quantity': current_quantity + ing_quantity}
-    print('Задача №2')
     for ingredient in shop_list:
         print(f'{ingredient}: {shop_list[ingredient]}')
 
